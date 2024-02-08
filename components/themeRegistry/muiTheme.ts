@@ -15,7 +15,7 @@ export interface TailwindColors {
 }
 
 const tailwindConfig = resolveConfig(tailwindConfigModule);
-const themeColors = tailwindConfig?.theme?.colors;
+const themeColors = tailwindConfig?.theme?.colors as TailwindColors;
 
 export const lightPalette: ThemeOptions['palette'] = {
   mode: 'light',
