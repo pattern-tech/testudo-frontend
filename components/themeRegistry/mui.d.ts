@@ -46,6 +46,7 @@ declare module '@mui/material/styles' {
     surfaceContainerLowest: Palette['primary'];
     surfaceBright: Palette['primary'];
     surfaceDim: Palette['primary'];
+    shadow: Palette['primary'];
 
     green: Palette['primary'];
     orange: Palette['primary'];
@@ -97,6 +98,7 @@ declare module '@mui/material/styles' {
     surfaceContainerLowest: PaletteOptions['primary'];
     surfaceBright: PaletteOptions['primary'];
     surfaceDim: PaletteOptions['primary'];
+    shadow: PaletteOptions['primary'];
 
     green?: PaletteOptions['primary'];
     orange?: PaletteOptions['primary'];

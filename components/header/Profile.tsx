@@ -1,12 +1,18 @@
 'use client';
-import { ButtonBase } from '@mui/material';
+import { useState } from 'react';
+
 import Image from 'next/image';
+
+import Button from '../button/Button';
+import PopUp from '../PopUp/PopUp';
 
 interface Props {
   isLoggedIn: boolean;
 }
 
 export const Profile = ({ isLoggedIn }: Props) => {
+  const [isOpen, setIsOpen] = useState(true);
+
   return (
     <>
       {isLoggedIn ? (
@@ -31,9 +37,16 @@ export const Profile = ({ isLoggedIn }: Props) => {
           />
         </div>
       ) : (
-        <ButtonBase className="rounded-3xl bg-primary-dark px-6 py-2.5 text-sm font-semibold text-onPrimary-dark ">
-          Sign in/ Register
-        </ButtonBase>
+        <Button onClick={() => setIsOpen(true)}>Sign in/ Register</Button>
+      )}
+      {isOpen && (
+        <PopUp
+          title="Login"
+          state={isOpen}
+          handleClose={() => setIsOpen(false)}
+        >
+          <div className="mt-5"></div>
+        </PopUp>
       )}
     </>
   );

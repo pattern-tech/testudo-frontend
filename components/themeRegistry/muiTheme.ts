@@ -133,6 +133,7 @@ export const darkPalette: ThemeOptions['palette'] = {
   surfaceContainerLowest: { main: themeColors?.surfaceContainerLowest?.dark },
   surfaceBright: { main: themeColors?.surfaceBright?.dark },
   surfaceDim: { main: themeColors?.surfaceDim?.dark },
+  shadow: { main: themeColors?.shadow?.dark },
 };
 
 export const getMuiTheme = (mode: PaletteMode = 'light') => {
