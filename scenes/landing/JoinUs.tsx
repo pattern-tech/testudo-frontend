@@ -17,7 +17,7 @@ export const Item = ({
 }: ItemProps) => {
   return (
     <div
-      className={` mt-16 flex items-center justify-between ${rootClassName}`}
+      className={`mt-16 flex w-full items-center justify-between ${rootClassName}`}
     >
       <div className="flex w-3/12 flex-col items-center	">
         <h3 className=" text-headline-large font-extrabold leading-[5rem]">
@@ -34,7 +34,7 @@ export const Item = ({
 
 export const JoinUs = () => {
   return (
-    <div className="mt-40 flex flex-col items-center">
+    <div className="mb-[8.75rem] mt-40 flex flex-col items-center">
       <h2 className=" text-[2.5rem] font-extrabold leading-loose">
         Join Testudo
       </h2>

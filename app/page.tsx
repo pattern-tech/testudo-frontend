@@ -2,7 +2,14 @@ import React from 'react';
 
 import { Box } from '@mui/material';
 
-import { Banner, Reward, Statistics, JoinUs, Footer } from '@/scenes/landing';
+import {
+  Banner,
+  Reward,
+  Statistics,
+  JoinUs,
+  Faq,
+  Footer,
+} from '@/scenes/landing';
 
 const Landing = () => (
   <>
@@ -14,6 +21,7 @@ const Landing = () => (
       <Reward />
       <Statistics />
       <JoinUs />
+      <Faq />
     </Box>
     <Footer />
   </>

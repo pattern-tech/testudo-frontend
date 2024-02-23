@@ -6,4 +6,6 @@ export { Statistics } from './statistics/Statistics';
 
 export { JoinUs } from './JoinUs';
 
+export { Faq } from './faq/Faq';
+
 export { Footer } from './Footer';

@@ -4,14 +4,14 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 import Button from '../button/Button';
-import PopUp from '../PopUp/PopUp';
+import PopUp from '../popup/Popup';
 
 interface Props {
   isLoggedIn: boolean;
 }
 
 export const Profile = ({ isLoggedIn }: Props) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
