@@ -26,7 +26,7 @@ export const Earnings = () => {
         <EarningValues title="Monthly Earnings" amount="2.36573251  RSN" />
         <EarningValues title="Yearly Earnings" amount="32.39  RSN" />
       </div>
-      <Button>Earn now</Button>
+      <Button kind="Filled">Earn now</Button>
     </div>
   );
 };

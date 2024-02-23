@@ -24,7 +24,7 @@ const StyledDialog = styled(Dialog)(({ theme }) => ({
     margin: '0',
     backgroundColor: theme.palette.surface.main,
     borderRadius: '0.75rem',
-    minWidth: '36.75rem',
+    width: '35.5rem',
   },
   '& .MuiDialogTitle-root': {
     color: theme.palette.onSurface.main,
@@ -57,7 +57,7 @@ export default function PopUp({ state, handleClose, children, title }: Props) {
           />
         </IconButton>
       </div>
-      <DialogContent>{children}</DialogContent>
+      <DialogContent sx={{ padding: 0 }}>{children}</DialogContent>
     </StyledDialog>
   );
 }

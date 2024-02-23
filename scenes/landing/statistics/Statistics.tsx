@@ -16,7 +16,7 @@ export const Statistics = () => {
         <StatisticBox value="200+" description="Online watchers" />
         <StatisticBox value="+ $23K" description="Claimed rewards" />
       </div>
-      <Button>Stake now</Button>
+      <Button kind="Filled">Stake now</Button>
     </div>
   );
 };

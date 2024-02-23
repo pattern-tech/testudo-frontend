@@ -4,7 +4,9 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 import Button from '../button/Button';
-import PopUp from '../PopUp/PopUp';
+import PopUp from '../popUp/PopUp';
+
+import { Authentication } from './authentication/Authentication';
 
 interface Props {
   isLoggedIn: boolean;
@@ -37,7 +39,9 @@ export const Profile = ({ isLoggedIn }: Props) => {
           />
         </div>
       ) : (
-        <Button onClick={() => setIsOpen(true)}>Sign in/ Register</Button>
+        <Button kind="Filled" onClick={() => setIsOpen(true)}>
+          Sign in/ Register
+        </Button>
       )}
       {isOpen && (
         <PopUp
@@ -45,7 +49,7 @@ export const Profile = ({ isLoggedIn }: Props) => {
           state={isOpen}
           handleClose={() => setIsOpen(false)}
         >
-          <div className="mt-5"></div>
+          <Authentication />
         </PopUp>
       )}
     </>
