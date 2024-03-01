@@ -1,20 +1,19 @@
 import {
-  GoogleRequestResponse,
   GoogleCallbackResponse,
   NautilusBodyRequest,
   NautilusResponse,
   ErgoPayResponse,
-  ErgoPaySignInResponse,
   ErgoPayRequestParameter,
+  GoogleCallbackRequestParameter,
+  UserInfoResponse,
 } from '@/api/auth/authApi.types';
 import { httpClient } from '@/utils/http-client';
 
 export const authApi = {
-  googleRequest: async (): Promise<GoogleRequestResponse> =>
-    httpClient.get(`/auth/google`),
-
-  googleCallback: async (): Promise<GoogleCallbackResponse> =>
-    httpClient.get(`/auth/google/callback`),
+  googleCallback: async (
+    parameter: GoogleCallbackRequestParameter,
+  ): Promise<GoogleCallbackResponse> =>
+    httpClient.get(`/auth/google/callback?code=${parameter.code}`),
 
   nautilus: async (body: NautilusBodyRequest): Promise<NautilusResponse> =>
     httpClient.post(`/auth/nautilus`, body),
@@ -24,9 +23,6 @@ export const authApi = {
   }: ErgoPayRequestParameter): Promise<ErgoPayResponse> =>
     httpClient.get(`/ergopay/${address}`), // should be ergoauth://localhost/auth/ergopay/:address
 
-  ergoPaySignIn: async (
-    address: ErgoPayRequestParameter,
-    body: string,
-  ): Promise<ErgoPaySignInResponse> =>
-    httpClient.get(`/ergopay/${address}/signin`, body), // should be ergoauth://localhost/auth/ergopay/:address
+  userInfo: async (token: string | null): Promise<UserInfoResponse> =>
+    httpClient.get(`/auth/getUserInfo`, undefined, token),
 };

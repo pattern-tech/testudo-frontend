@@ -1,57 +1,99 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import IconButton from '@mui/material/IconButton';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
+
+import { authApiGateway } from '@/api/auth';
 
 import Button from '../button/Button';
-import PopUp from '../popUp/PopUp';
+import PopUp from '../popup/PopUp';
 
 import { Authentication } from './authentication/Authentication';
 
-interface Props {
-  isLoggedIn: boolean;
-}
+export const Profile = () => {
+  const token = localStorage?.getItem('token');
 
-export const Profile = ({ isLoggedIn }: Props) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const searchParams = useSearchParams();
 
-  return (
-    <>
-      {isLoggedIn ? (
-        <div className="flex items-center justify-between">
-          <div className="mr-3 flex flex-row-reverse items-center justify-between">
-            <span className="text-sm font-medium text-onPrimary-light">
-              Sepanta Pouya
-            </span>
-            <Image
-              src="/images/profileSample.svg"
-              alt="profile pic"
-              width={24}
-              height={24}
-              className="mr-2"
-            />
-          </div>
+  const [isOpen, setIsOpen] = useState(false);
+  const [googleCode, setGoogleCode] = useState(
+    searchParams?.get('code') ?? undefined,
+  );
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    (token && token?.length > 0) || false,
+  );
+
+  const { useUserInfo } = authApiGateway;
+  const userInfo = useUserInfo(token);
+
+  useEffect(() => {
+    if (token && token?.length > 0) {
+      setIsLoggedIn(true);
+      userInfo.refetch();
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (googleCode && googleCode?.length > 0) {
+      setIsOpen(true);
+    }
+  }, []);
+
+  if (!isLoggedIn && isOpen)
+    return (
+      <PopUp title="Login" state={isOpen} handleClose={() => setIsOpen(false)}>
+        <Authentication handleCloseModal={setIsOpen} />
+      </PopUp>
+    );
+
+  if (isLoggedIn && userInfo?.data)
+    return (
+      <div className="flex items-center justify-between">
+        <div className="mr-3 flex flex-row-reverse items-center justify-between">
+          <span className="text-sm font-medium text-onPrimary-light">
+            {userInfo?.data?.addresses
+              ? userInfo?.data?.addresses[0]?.id.slice(0, 8) +
+                '...' +
+                userInfo?.data?.addresses[0]?.id.slice(-8)
+              : userInfo?.data?.user?.firstName +
+                ' ' +
+                userInfo?.data?.user?.lastName}
+          </span>
+          <Image
+            src={
+              userInfo?.data?.addresses
+                ? '/images/profileSample.svg'
+                : (userInfo?.data?.user?.picture as string)
+            }
+            alt="profile pic"
+            width={24}
+            height={24}
+            className="mr-2 rounded"
+          />
+        </div>
+        <IconButton
+          onClick={() => {
+            localStorage.removeItem('token');
+            setGoogleCode(undefined);
+            setIsLoggedIn(false);
+          }}
+          className="m-0 p-0"
+        >
           <Image
             src="/images/logout.svg"
             alt="logout icon"
             width={48}
             height={48}
           />
-        </div>
-      ) : (
-        <Button kind="Filled" onClick={() => setIsOpen(true)}>
-          Sign in/ Register
-        </Button>
-      )}
-      {isOpen && (
-        <PopUp
-          title="Login"
-          state={isOpen}
-          handleClose={() => setIsOpen(false)}
-        >
-          <Authentication />
-        </PopUp>
-      )}
-    </>
-  );
+        </IconButton>
+      </div>
+    );
+  else if (!isLoggedIn)
+    return (
+      <Button kind="Filled" onClick={() => setIsOpen(true)}>
+        Sign in/ Register
+      </Button>
+    );
 };

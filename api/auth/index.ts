@@ -2,43 +2,33 @@ import { useQuery } from '@tanstack/react-query';
 
 import { authApi } from '@/api/auth/authApi';
 import {
-  GoogleRequestSuccessResponse,
-  GoogleRequestResponse,
   SignInSuccessResponse,
   GoogleCallbackResponse,
   NautilusBodyRequest,
   NautilusResponse,
   ErgoPaySuccessResponse,
   ErgoPayResponse,
-  ErgoPaySignInResponse,
   ErgoPayRequestParameter,
+  GoogleCallbackRequestParameter,
+  UserInfoSuccessResponse,
+  UserInfoResponse,
 } from '@/api/auth/authApi.types';
 import { queryKeys } from '@/utils/react-query-keys';
 import { ApiError } from '@/utils/types';
 
 export const authApiGateway = {
-  useGoogleRequest: () =>
-    useQuery<GoogleRequestResponse, ApiError, GoogleRequestSuccessResponse>(
-      queryKeys.authKeys.useGoogleRequest(),
-      {
-        queryFn: () => authApi.googleRequest(),
-      },
-    ),
-
-  useGoogleCallback: () =>
+  useGoogleCallback: (parameter: GoogleCallbackRequestParameter) =>
     useQuery<GoogleCallbackResponse, ApiError, SignInSuccessResponse>(
-      queryKeys.authKeys.useGoogleCallback(),
-      {
-        queryFn: () => authApi.googleCallback(),
-      },
+      queryKeys.authKeys.useGoogleCallback(parameter),
+      () => authApi.googleCallback(parameter),
+      { enabled: !!parameter.code },
     ),
 
   useNautilus: (body: NautilusBodyRequest) =>
     useQuery<NautilusResponse, ApiError, SignInSuccessResponse>(
       queryKeys.authKeys.useNautilus(body),
-      {
-        queryFn: () => authApi.nautilus(body),
-      },
+      () => authApi.nautilus(body),
+      { enabled: !!(body.address && body.message && body.proof) },
     ),
   useErgoPay: (parameter: ErgoPayRequestParameter) =>
     useQuery<ErgoPayResponse, ApiError, ErgoPaySuccessResponse>(
@@ -47,11 +37,13 @@ export const authApiGateway = {
         queryFn: () => authApi.ergoPay(parameter),
       },
     ),
-  useErgoPaySignIn: (parameter: ErgoPayRequestParameter, body: string) =>
-    useQuery<ErgoPaySignInResponse, ApiError, SignInSuccessResponse>(
-      queryKeys.authKeys.useErgoPaySignIn(parameter, body),
+
+  useUserInfo: (token: string | null) =>
+    useQuery<UserInfoResponse, ApiError, UserInfoSuccessResponse>(
+      queryKeys.authKeys.useUserInfo(token),
+      () => authApi.userInfo(token),
       {
-        queryFn: () => authApi.ergoPaySignIn(parameter, body),
+        enabled: !!token, // Only enable the query when the token is present
       },
     ),
 };

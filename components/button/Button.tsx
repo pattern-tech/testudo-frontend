@@ -33,21 +33,20 @@ export default function Button({
   ...rest
 }: Props) {
   const StyledButton = styled(ButtonBase)`
-    & .MuiButtonBase-root {
-      background-color: ${getColorBasedOnKind(kind).bgColor};
-      color: ${getColorBasedOnKind(kind).color};
-      padding: 0.625rem 1.5rem;
-      border-radius: 6.25rem;
-      width: ${fullWidth ? '100%' : 'auto'};
-      cursor: pointer;
-    }
+    background-color: ${getColorBasedOnKind(kind).bgColor} !important;
+    color: ${getColorBasedOnKind(kind).color};
+    padding: 0.625rem 1.5rem;
+    border-radius: 6.25rem;
+    width: ${fullWidth ? '100%' : 'auto'};
+    cursor: pointer;
   `;
 
   return (
-    <StyledButton sx={{ width: fullWidth ? '100%' : 'auto' }}>
-      <ButtonBase {...rest} className={`${className} text-sm font-semibold`}>
-        {children}
-      </ButtonBase>
+    <StyledButton
+      {...rest}
+      className={`${className} styledBtn text-sm font-semibold`}
+    >
+      {children}
     </StyledButton>
   );
 }

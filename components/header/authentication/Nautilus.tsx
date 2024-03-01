@@ -1,57 +1,78 @@
-'use client';
-import React from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 
-import { Address } from '@ergolabs/ergo-sdk';
 import Image from 'next/image';
-import { Observable, of, throwError } from 'rxjs';
 
+import { authApiGateway } from '@/api/auth';
 import Button from '@/components/button/Button';
+import { apiConfig } from '@/utils/constants';
+import { connectWallet, getWalletAddress } from '@/utils/nautilus';
+import useWebSocket from '@/utils/useWebSocket';
 
-export const Nautilus = () => {
-  const ergoConnector = window.ergoConnector;
+interface Props {
+  handleCloseModal: Dispatch<SetStateAction<boolean>>;
+}
 
-  const connectWallet = (): Observable<unknown> => {
-    if (!ergoConnector?.nautilus) {
-      return throwError(() => new Error('EXTENSION_NOT_FOUND'));
-    }
+export const Nautilus = ({ handleCloseModal }: Props) => {
+  const { socket, connected } = useWebSocket(apiConfig.BASE_API_URL);
+  const [uuid, setUuid] = useState('');
 
-    if (!ergoConnector.nautilus?.getContext) {
-      return of(
-        <>
-          Wallet API has changed. Be sure to update your wallet to continue
-          using it
-        </>,
-      );
-    }
+  const { useNautilus } = authApiGateway;
 
-    return ergoConnector.nautilus.connect();
-  };
+  const [parameters, setParameters] = useState({
+    proof: undefined,
+    message: undefined,
+    address: undefined,
+  });
 
-  const getUsedAddresses = async (): Observable<Address[]> => {
-    const walletAddress = await ergoConnector.nautilus
-      .getContext()
-      .then(async (context) => {
-        console.log('Wallet Address:', await context.get_used_addresses()[0]);
-
-        return context.get_used_addresses();
-      })
-      .catch((error: Error) => {
-        throw error;
-      });
-
-    return walletAddress;
-  };
+  const nautilusResponse = useNautilus(parameters);
 
   connectWallet();
 
+  const ergoAuth = async () => {
+    const ergoAuthResult = await ergo.auth(parameters.address, uuid);
+
+    setParameters({
+      ...parameters,
+      proof: ergoAuthResult.proof,
+      message: ergoAuthResult.signedMessage,
+    });
+    nautilusResponse.refetch();
+  };
+
+  useEffect(() => {
+    if (parameters?.address && uuid?.length > 0) ergoAuth();
+  }, [uuid, parameters.address]);
+
+  useEffect(() => {
+    if (nautilusResponse?.data?.token) {
+      localStorage.setItem('token', nautilusResponse?.data?.token);
+      setParameters({
+        address: undefined,
+        proof: undefined,
+        message: undefined,
+      });
+      setUuid('');
+      handleCloseModal(false);
+    }
+  }, [nautilusResponse?.data]);
+
+  const handleSubmit = async () => {
+    setUuid('');
+    setParameters({ ...parameters, address: await getWalletAddress() });
+
+    if (connected) {
+      socket?.emit('register_address', {
+        address: parameters.address,
+      });
+
+      socket?.on('register_success', (data) => {
+        setUuid(data?.uuid);
+      });
+    }
+  };
+
   return (
-    <Button
-      fullWidth
-      kind="Tonal"
-      onClick={async () => {
-        getUsedAddresses();
-      }}
-    >
+    <Button fullWidth kind="Tonal" onClick={handleSubmit}>
       <Image
         src="/images/nautilusLogo.svg"
         alt="nautilusLogo logo"
