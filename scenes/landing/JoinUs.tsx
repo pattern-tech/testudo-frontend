@@ -2,6 +2,9 @@ import React from 'react';
 
 import Image from 'next/image';
 
+import joinUs1 from '@/assets/svg/joinUs1.svg';
+import joinUs2 from '@/assets/svg/joinUs2.svg';
+
 interface ItemProps {
   title: string;
   description: string;
@@ -41,13 +44,13 @@ export const JoinUs = () => {
       <Item
         title="Become a Watcher"
         description="Contribute to Rosen security and expansion without the need of running a node."
-        imgSrc="/images/joinUs1.svg"
+        imgSrc={joinUs1}
         rootClassName="flex-row"
       />
       <Item
         title="Earn money"
         description="Stake your RSN or Ergo with Testudo to protect the network and earn rewards."
-        imgSrc="/images/joinUs2.svg"
+        imgSrc={joinUs2}
         rootClassName="flex-row-reverse"
       />
     </div>

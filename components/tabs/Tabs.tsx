@@ -14,6 +14,7 @@ interface TabProps {
 
 interface TabsProps {
   tabs: TabProps[];
+  className?: string;
 }
 
 const StyledTab = styled(Tab)`
@@ -28,7 +29,7 @@ const StyledTab = styled(Tab)`
   }
 `;
 
-export default function CenteredTabs({ tabs }: TabsProps) {
+export default function CenteredTabs({ tabs, className }: TabsProps) {
   const [value, setValue] = useState(0);
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
@@ -36,7 +37,7 @@ export default function CenteredTabs({ tabs }: TabsProps) {
   };
 
   return (
-    <>
+    <Box className={className}>
       <Box sx={{ width: '100%' }}>
         <Tabs
           className="mb-9 border-b border-solid border-surfaceContainerHigh-dark "
@@ -54,6 +55,6 @@ export default function CenteredTabs({ tabs }: TabsProps) {
           {tab.children}
         </TabPanel>
       ))}
-    </>
+    </Box>
   );
 }

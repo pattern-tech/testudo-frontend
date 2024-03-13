@@ -3,7 +3,8 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import Image from 'next/image';
 
 import { authApiGateway } from '@/api/auth';
-import Button from '@/components/button/Button';
+import nautilusLogo from '@/assets/svg/nautilusLogo.svg';
+import Button from '@/components/Button';
 import { apiConfig } from '@/utils/constants';
 import { connectWallet, getWalletAddress } from '@/utils/nautilus';
 import useWebSocket from '@/utils/useWebSocket';
@@ -74,7 +75,7 @@ export const Nautilus = ({ handleCloseModal }: Props) => {
   return (
     <Button fullWidth kind="Tonal" onClick={handleSubmit}>
       <Image
-        src="/images/nautilusLogo.svg"
+        src={nautilusLogo}
         alt="nautilusLogo logo"
         width={18}
         height={18}

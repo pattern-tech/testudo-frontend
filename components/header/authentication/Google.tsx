@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 
 import { authApiGateway } from '@/api/auth';
-import Button from '@/components/button/Button';
+import googleLogo from '@/assets/svg/googleLogo.svg';
+import Button from '@/components/Button';
 import { apiConfig } from '@/utils/constants';
 
 interface Props {
@@ -44,7 +45,7 @@ export const Google = ({ className, handleCloseModal }: Props) => {
       }
     >
       <Image
-        src="/images/googleLogo.svg"
+        src={googleLogo}
         alt="google logo"
         width={18}
         height={18}

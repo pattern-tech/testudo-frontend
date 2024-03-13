@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 
-import Button from '@/components/button/Button';
+import Button from '@/components/Button';
 import { apiConfig } from '@/utils/constants';
 import useWebSocket from '@/utils/useWebSocket';
 

@@ -8,6 +8,8 @@ import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import Image from 'next/image';
 
+import closeIcon from '@/assets/svg/closeIcon.svg';
+
 interface Props {
   state: boolean;
   handleClose: () => void;
@@ -49,12 +51,7 @@ export default function PopUp({ state, handleClose, children, title }: Props) {
             padding: 0,
           }}
         >
-          <Image
-            src="/images/closeIcon.svg"
-            alt="close icon"
-            width={48}
-            height={48}
-          />
+          <Image src={closeIcon} alt="close icon" width={48} height={48} />
         </IconButton>
       </div>
       <DialogContent sx={{ padding: 0 }}>{children}</DialogContent>

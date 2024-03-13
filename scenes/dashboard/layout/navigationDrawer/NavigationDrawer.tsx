@@ -18,10 +18,11 @@ interface StyledDrawerProps extends DrawerProps {
 }
 
 const StyledDrawer = styled(Drawer)<StyledDrawerProps>`
+  width: ${({ width }) => width + '%'};
   & .MuiDrawer-paper {
     box-sizing: border-box;
     background-color: ${({ theme }) => theme.palette.surfaceContainerLow.main};
-    width: ${({ width }) => width + 'rem'};
+    width: ${({ width }) => width + '%'};
     border: none;
     border-radius: 1rem;
     top: 9%;
@@ -35,12 +36,7 @@ const StyledDrawer = styled(Drawer)<StyledDrawerProps>`
 
 export const NavigationDrawer = ({ drawerWidth, menuItems }: Props) => {
   return (
-    <StyledDrawer
-      className={`w-[${drawerWidth}rem]`}
-      variant="permanent"
-      width={drawerWidth}
-      open
-    >
+    <StyledDrawer width={drawerWidth} variant="permanent" open>
       <Drawer variant="permanent" anchor="left">
         {menuItems?.primary && (
           <div>

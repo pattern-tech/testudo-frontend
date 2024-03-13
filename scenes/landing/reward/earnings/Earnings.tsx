@@ -1,24 +1,18 @@
 import React from 'react';
 
-import Button from '@/components/button/Button';
+import ergCoin from '@/assets/svg/ergCoin.svg';
+import rsnCoin from '@/assets/svg/rsnCoin.svg';
+import Button from '@/components/Button';
+import { EarningIconItem } from '@/components/EarningIconItem';
 
-import { EarningIconItem } from './EarningIconItem';
 import { EarningValues } from './EarningValues';
 
 export const Earnings = () => {
   return (
     <div className="mt-[3.75rem] flex flex-col items-center justify-between">
       <div className="flex flex-row items-center">
-        <EarningIconItem
-          iconSrc="/images/ergCoin.svg"
-          name="ERG"
-          amount={500}
-        />
-        <EarningIconItem
-          iconSrc="/images/rsnCoin.svg"
-          name="RSN"
-          amount={500}
-        />
+        <EarningIconItem iconSrc={ergCoin} name="ERG" amount={500} />
+        <EarningIconItem iconSrc={rsnCoin} name="RSN" amount={500} />
       </div>
 
       <div className="mb-[3.75rem] mt-5">
