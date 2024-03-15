@@ -8,7 +8,7 @@ import { useSearchParams } from 'next/navigation';
 import { authApiGateway } from '@/api/auth';
 
 import Button from '../button/Button';
-import PopUp from '../popup/PopUp';
+import PopUp from '../popUp/PopUp';
 
 import { Authentication } from './authentication/Authentication';
 
