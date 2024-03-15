@@ -8,8 +8,6 @@ import { NextAppDirEmotionCacheProvider } from './EmotionCache';
 import { getMuiTheme } from './muiTheme';
 
 export function MuiThemeRegistry({ children }: { children: React.ReactNode }) {
-  console.log('getMuiTheme()', getMuiTheme());
-
   return (
     <NextAppDirEmotionCacheProvider options={{ key: 'mui', prepend: true }}>
       <ThemeProvider theme={getMuiTheme('dark')}>

@@ -6,7 +6,7 @@ import { ReactQueryProviders } from '@/context/reactQuery';
 export const AppProviders = ({ children }: { children: ReactNode }) => {
   return (
     <MuiThemeRegistry>
-      <ReactQueryProviders>{children}</ReactQueryProviders>
+      <ReactQueryProviders> {children}</ReactQueryProviders>
     </MuiThemeRegistry>
   );
 };
