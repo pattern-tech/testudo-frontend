@@ -2,6 +2,7 @@ module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './scenes/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
@@ -200,7 +201,7 @@ module.exports = {
         shadow: {
           light: 'rgb(0 0 0)',
           DEFAULT: '#000000',
-          dark: 'rgb(0 0 0)',
+          dark: 'rgb(0 0 0 / 85%)',
         },
         surfaceTint: {
           light: 'rgb(33 100 135)',
@@ -255,6 +256,7 @@ module.exports = {
         green: {
           light: '#056E00',
           DEFAULT: '#056E00',
+          dark: '#00CA81',
         },
         orange: {
           light: '#FF8022',

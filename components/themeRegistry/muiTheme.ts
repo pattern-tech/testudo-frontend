@@ -1,5 +1,9 @@
 import { PaletteMode } from '@mui/material';
-import { createTheme, ThemeOptions } from '@mui/material/styles';
+import {
+  createTheme,
+  ThemeOptions,
+  PaletteOptions,
+} from '@mui/material/styles';
 import resolveConfig from 'tailwindcss/resolveConfig';
 
 import { PlusJakarta } from '@/font';
@@ -12,6 +16,10 @@ export interface TailwindColors {
     light: string;
     dark: string;
   };
+}
+
+interface CustomPaletteOptions extends PaletteOptions {
+  outline?: { main: string };
 }
 
 const tailwindConfig = resolveConfig(tailwindConfigModule);
@@ -75,9 +83,10 @@ export const lightPalette: ThemeOptions['palette'] = {
   surfaceContainerLowest: { main: themeColors?.surfaceContainerLowest?.light },
   surfaceBright: { main: themeColors?.surfaceBright?.light },
   surfaceDim: { main: themeColors?.surfaceDim?.light },
+  shadow: { main: themeColors?.shadow?.light },
 };
 
-export const darkPalette: ThemeOptions['palette'] = {
+export const darkPalette: CustomPaletteOptions = {
   mode: 'dark',
   primary: { main: themeColors?.primary?.dark },
   onPrimary: { main: themeColors?.onPrimary?.dark },
@@ -118,6 +127,7 @@ export const darkPalette: ThemeOptions['palette'] = {
   onError: { main: themeColors?.onError?.dark },
   errorContainer: { main: themeColors?.errorContainer?.dark },
   onErrorContainer: { main: themeColors?.onErrorContainer?.dark },
+  outline: { main: themeColors?.outline?.dark },
 
   surface: { main: themeColors?.surface?.dark },
   onSurface: { main: themeColors?.onSurface?.dark },
@@ -133,6 +143,7 @@ export const darkPalette: ThemeOptions['palette'] = {
   surfaceContainerLowest: { main: themeColors?.surfaceContainerLowest?.dark },
   surfaceBright: { main: themeColors?.surfaceBright?.dark },
   surfaceDim: { main: themeColors?.surfaceDim?.dark },
+  shadow: { main: themeColors?.shadow?.dark },
 };
 
 export const getMuiTheme = (mode: PaletteMode = 'light') => {
