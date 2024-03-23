@@ -32,7 +32,7 @@ export const Layout = ({ children, currentMenu }: Props) => {
       />
       <Box
         component="main"
-        className="h-full w-9/12 flex-grow overflow-y-auto bg-background-dark"
+        className="h-[92%] w-9/12 flex-grow overflow-y-auto bg-background-dark"
       >
         {children}
       </Box>
