@@ -22,7 +22,6 @@ export const EXPLORER = "https://explorer.ergoplatform.com"
 export const API = 'https://api.ergoplatform.com'
 export const defaultSlippage = 3;
 export const DEFAULT_MINER_FEE = BigInt(2_000_000);
-export const DEFAULT_OUR_FEE = BigInt(1_000_000);
 
 export const POOL_ID = "1b694b15467c62f0cd4525e368dbdea2329c713aa200b73df4a622e950551b40";
 export const ERGO_ID =
@@ -30,6 +29,7 @@ export const ERGO_ID =
 export const ROSEN_ID = '8b08cdd5449a9592a9e79711d7d79249d7a03c535d17efaee83e216e80a44c4b'
 export const MIN_NITRO = 1.2;
 export const NEW_MIN_BOX_VALUE = 400000n;
+export const txFee = 1000000n
 
 export type BaseInputParameters = {
     baseInput: AssetAmount;

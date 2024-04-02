@@ -21,7 +21,7 @@ import {NativeExFeeType} from "@ergolabs/ergo-dex-sdk/build/main/types";
 import {NetworkContext} from "@ergolabs/ergo-sdk/build/main/entities/networkContext";
 import {
     API,
-    DEFAULT_MINER_FEE, DEFAULT_OUR_FEE,
+    DEFAULT_MINER_FEE,
     defaultSlippage,
     ERGO_ID, EXPLORER,
     getBaseInputParameters,
@@ -29,7 +29,7 @@ import {
     getUTXOS,
     MIN_NITRO, Pool,
     ROSEN_ID, POOL_ID
-} from "@/utils/swap";
+} from "@/utils/utils";
 class myprover implements Prover {
     /** Sign the given transaction.
      */
@@ -66,7 +66,7 @@ class myprover implements Prover {
 
 
 
-export const swap = async (rosen_amount: number, output_address: string, return_address: string): Promise<ErgoTx> => {
+export async function swap (rosen_amount: number, erg_amount: number, output_address: string, return_address: string): Promise<ErgoTx> {
     await RustModule.load(false)
     const api = new Explorer(API)
     const networkContext = await api.getNetworkContext()
@@ -112,7 +112,7 @@ export const swap = async (rosen_amount: number, output_address: string, return_
         [new AssetAmount(from.asset, baseInputAmount)],
         {
             minerFee: DEFAULT_MINER_FEE,
-            uiFee: DEFAULT_OUR_FEE,
+            uiFee: BigInt(erg_amount),
             exFee: extremum.maxExFee,
         },
     );
@@ -122,7 +122,7 @@ export const swap = async (rosen_amount: number, output_address: string, return_
         baseInput,
         minQuoteOutput: extremum.minOutput.amount,
         exFeePerToken,
-        uiFee: DEFAULT_OUR_FEE,
+        uiFee: BigInt(erg_amount),
         quoteAsset: to.asset.id,
         poolFeeNum: pool.poolFeeNum,
         maxExFee: extremum.maxExFee,
