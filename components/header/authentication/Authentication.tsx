@@ -2,6 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 
 import Image from 'next/image';
 
+import line from '@/assets/svg/line.svg';
 import CenteredTabs from '@/components/tabs/Tabs';
 
 import { ErgoPay } from './ErgoPay';
@@ -30,7 +31,7 @@ export const Authentication = ({ handleCloseModal }: Props) => {
                 <Nautilus handleCloseModal={handleCloseModal} />
                 <div className="my-3 flex items-center justify-center">
                   <Image
-                    src="/images/line.svg"
+                    src={line}
                     alt="nautilusLogo logo"
                     width={157}
                     height={1}
@@ -40,7 +41,7 @@ export const Authentication = ({ handleCloseModal }: Props) => {
                     Or
                   </span>
                   <Image
-                    src="/images/line.svg"
+                    src={line}
                     alt="nautilusLogo logo"
                     width={157}
                     height={1}

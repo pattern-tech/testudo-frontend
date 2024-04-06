@@ -6,10 +6,10 @@ import { Banner, Reward, Statistics, JoinUs, Footer } from '@/scenes/landing';
 
 const Landing = () => {
   return (
-    <>
+    <Box className="h-full overflow-y-auto pb-14">
       <Box
         component="main"
-        className="flex-grow bg-background-dark px-[6.25rem] py-20"
+        className=" flex-grow  bg-background-dark px-[6.25rem] py-20"
       >
         <Banner />
         <Reward />
@@ -17,7 +17,7 @@ const Landing = () => {
         <JoinUs />
       </Box>
       <Footer />
-    </>
+    </Box>
   );
 };
 

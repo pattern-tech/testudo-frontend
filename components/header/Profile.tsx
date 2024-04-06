@@ -6,9 +6,11 @@ import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 
 import { authApiGateway } from '@/api/auth';
+import logout from '@/assets/svg/logout.svg';
+import profileSample from '@/assets/svg/profileSample.svg';
 
-import Button from '../button/Button';
-import PopUp from '../popup/PopUp';
+import Button from '../Button';
+import PopUp from '../PopUp';
 
 import { Authentication } from './authentication/Authentication';
 
@@ -64,7 +66,7 @@ export const Profile = () => {
           <Image
             src={
               userInfo?.data?.addresses
-                ? '/images/profileSample.svg'
+                ? profileSample
                 : (userInfo?.data?.user?.picture as string)
             }
             alt="profile pic"
@@ -81,12 +83,7 @@ export const Profile = () => {
           }}
           className="m-0 p-0"
         >
-          <Image
-            src="/images/logout.svg"
-            alt="logout icon"
-            width={48}
-            height={48}
-          />
+          <Image src={logout} alt="logout icon" width={48} height={48} />
         </IconButton>
       </div>
     );
