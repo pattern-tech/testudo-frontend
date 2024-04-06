@@ -2,7 +2,7 @@ import React from 'react';
 
 import { HistoryItem } from './HistoryItem';
 
-export const RewardHistory = () => {
+const RewardHistory = () => {
   return (
     <div className="mt-6 flex flex-col">
       <HistoryItem
@@ -50,3 +50,5 @@ export const RewardHistory = () => {
     </div>
   );
 };
+
+export default RewardHistory;

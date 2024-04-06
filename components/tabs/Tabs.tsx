@@ -17,24 +17,24 @@ interface TabsProps {
   className?: string;
 }
 
-const StyledTab = styled(Tab)`
-  &.MuiTab-root {
-    color: ${({ theme }) => theme.palette.onSurfaceVariant.main};
-    padding: 0.875rem 1rem;
-    text-transform: none;
-    margin: 0 3.75rem;
-  }
-  &.Mui-selected {
-    color: ${({ theme }) => theme.palette.primary.main};
-  }
-`;
-
-export default function CenteredTabs({ tabs, className }: TabsProps) {
+const CenteredTabs = ({ tabs, className }: TabsProps) => {
   const [value, setValue] = useState(0);
 
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  const StyledTab = styled(Tab)`
+    &.MuiTab-root {
+      color: ${({ theme }) => theme.palette.onSurfaceVariant.main};
+      padding: 0.875rem 1rem;
+      text-transform: none;
+      margin: 0 ${tabs.length === 3 ? '3%' : '10%'};
+    }
+    &.Mui-selected {
+      color: ${({ theme }) => theme.palette.primary.main};
+    }
+  `;
 
   return (
     <Box className={className}>
@@ -57,4 +57,6 @@ export default function CenteredTabs({ tabs, className }: TabsProps) {
       ))}
     </Box>
   );
-}
+};
+
+export default CenteredTabs;

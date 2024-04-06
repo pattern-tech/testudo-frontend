@@ -33,13 +33,7 @@ const getColorBasedOnKind = (kind: 'Filled' | 'Tonal' | 'Outlined') => {
   }
 };
 
-export default function Button({
-  className,
-  kind,
-  fullWidth,
-  children,
-  ...rest
-}: Props) {
+const Button = ({ className, kind, fullWidth, children, ...rest }: Props) => {
   const StyledButton = styled(ButtonBase)`
     background-color: ${getColorBasedOnKind(kind).bgColor} !important;
     color: ${getColorBasedOnKind(kind).color};
@@ -58,4 +52,6 @@ export default function Button({
       {children}
     </StyledButton>
   );
-}
+};
+
+export default Button;

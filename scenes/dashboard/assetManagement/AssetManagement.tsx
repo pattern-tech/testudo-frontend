@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 
 import Image from 'next/image';
 
@@ -8,13 +8,20 @@ import info from '@/assets/svg/info.svg';
 import minus from '@/assets/svg/minus.svg';
 import plus from '@/assets/svg/plus.svg';
 import Button from '@/components/Button';
+import PopUp from '@/components/PopUp';
 import CenteredTabs from '@/components/tabs/Tabs';
 import Tooltip from '@/components/Tooltip';
-
-import { BalanceHistory } from './balanceHistory/BalanceHistory';
-import { RewardHistory } from './rewardHistory/RewardHistory';
+import Stake from '@/scenes/dashboard/assetManagement/actions/stake/Stake';
+import BalanceHistory from '@/scenes/dashboard/assetManagement/balanceHistory/BalanceHistory';
+import RewardHistory from '@/scenes/dashboard/assetManagement/rewardHistory/RewardHistory';
 
 export const AssetManagement = () => {
+  const [isOpenActionModals, setIsOpenActionModals] = useState({
+    stake: true,
+    unStake: false,
+    withdraw: false,
+  });
+
   return (
     <div className="m-auto w-2/4 pb-24 pt-5">
       <h4 className=" text-sm font-medium text-onPrimaryContainer-dark">
@@ -40,7 +47,13 @@ export const AssetManagement = () => {
         </Tooltip>
       </p>
       <div className=" mt-8 flex items-center justify-between gap-5">
-        <Button className="w-2/6" kind="Filled">
+        <Button
+          className="w-2/6"
+          kind="Filled"
+          onClick={() =>
+            setIsOpenActionModals({ ...isOpenActionModals, stake: true })
+          }
+        >
           <Image
             className="mr-2"
             src={plus}
@@ -84,6 +97,17 @@ export const AssetManagement = () => {
           },
         ]}
       />
+      {isOpenActionModals.stake && (
+        <PopUp
+          title="Stake money"
+          state={isOpenActionModals.stake}
+          handleClose={() =>
+            setIsOpenActionModals({ ...isOpenActionModals, stake: false })
+          }
+        >
+          <Stake />
+        </PopUp>
+      )}
     </div>
   );
 };

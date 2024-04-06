@@ -13,7 +13,7 @@ import { EarningIconItem } from '@/components/EarningIconItem';
 
 import { HistoryItem } from './HistoryItem';
 
-export const BalanceHistory = () => {
+const BalanceHistory = () => {
   return (
     <div className="mt-8 flex flex-col items-center">
       <div className="flex items-center justify-between">
@@ -31,7 +31,7 @@ export const BalanceHistory = () => {
         />
       </div>
       <div className=" mt-8 rounded-[1.25rem] bg-surfaceContainer-dark px-6 py-4 ">
-        <p className=" text-green-dark flex items-center justify-between text-sm font-medium">
+        <p className=" flex items-center justify-between text-sm font-medium text-green-dark">
           <Image
             className="mr-3"
             src={check}
@@ -91,3 +91,5 @@ export const BalanceHistory = () => {
     </div>
   );
 };
+
+export default BalanceHistory;

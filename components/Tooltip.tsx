@@ -21,10 +21,12 @@ const HtmlTooltip = styled(({ className, ...props }: TooltipProps) => (
   },
 }));
 
-export default function CustomizedTooltip({ title, children }: Props) {
+const CustomizedTooltip = ({ title, children }: Props) => {
   return (
     <HtmlTooltip placement="right" title={title}>
       {children}
     </HtmlTooltip>
   );
-}
+};
+
+export default CustomizedTooltip;

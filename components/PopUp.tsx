@@ -36,7 +36,7 @@ const StyledDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-export default function PopUp({ state, handleClose, children, title }: Props) {
+const PopUp = ({ state, handleClose, children, title }: Props) => {
   return (
     <StyledDialog onClose={handleClose} open={state}>
       <div className="flex items-center justify-between">
@@ -57,4 +57,6 @@ export default function PopUp({ state, handleClose, children, title }: Props) {
       <DialogContent sx={{ padding: 0 }}>{children}</DialogContent>
     </StyledDialog>
   );
-}
+};
+
+export default PopUp;
