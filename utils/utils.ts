@@ -31,6 +31,8 @@ export const MIN_NITRO = 1.2;
 export const NEW_MIN_BOX_VALUE = 400000n;
 export const txFee = 1000000n
 
+export const OUTPUT_ADDRESS = "insert address"
+
 export type BaseInputParameters = {
     baseInput: AssetAmount;
     baseInputAmount: bigint;
