@@ -30,7 +30,7 @@ const Wallet = ({ amount, onBack, onClickHandler }: Props) => {
         Continue your payment via Nautilis wallet.
         <br />
         This asset will be finally swapped and your final investment will be:
-        <span className="text-center text-sm font-bold">{amount.ergo} ERG & {amount.rsn} RSN</span>
+        <span className="text-center text-sm font-bold">20 ERG & 10 RSN</span>
       </p>
       <Button fullWidth kind="Tonal" onClick={onClickHandler}>
         <Image

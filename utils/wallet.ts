@@ -5,7 +5,7 @@ import {API, getUTXOS, ROSEN_ID, txFee} from "@/utils/utils";
 
 
 
-export async function send_tx(to: string, erg_amount: number, rosen_amount: number, return_to: string) {
+export async function send_tx(to: string, erg_amount: bigint, rosen_amount: bigint, return_to: string) {
     await RustModule.load(false)
     const api = new Explorer(API)
     const networkContext = await api.getNetworkContext()
@@ -14,7 +14,7 @@ export async function send_tx(to: string, erg_amount: number, rosen_amount: numb
         .from(utxos)
         .to(rosen_amount ? new OutputBuilder(String(erg_amount), to).addTokens({
             tokenId: ROSEN_ID,
-            amount: BigInt(rosen_amount)
+            amount: rosen_amount
         }) : new OutputBuilder(String(erg_amount), to))
         .sendChangeTo(return_to)
         .payFee(String(txFee))

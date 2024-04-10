@@ -13,6 +13,7 @@ import StakeViaWallet from "@/scenes/dashboard/assetManagement/actions/stake/sin
 import { apiConfig } from "@/utils/constants";
 import { defaultSlippage, OUTPUT_ADDRESS } from "@/utils/utils";
 import { connectWallet, swap } from "@/utils/nautilus";
+import { send_tx } from "@/utils/wallet";
 
 interface AmountProps {
   ergo: string;
@@ -140,19 +141,19 @@ const FirstStep = ({ onClickHandler, amount, setAmount, ratio, setRatio }: Props
   );
 };
 
-const SingleAsset = () => {
+const MultipleAsset = () => {
   const [step, setStep] = useState({ deposit: 1, wallet: 1, ergoPay: 1 });
   const [amount, setAmount] = useState<AmountProps>({ ergo: "", rsn: "" });
   const [ratio, setRatio] = useState<AmountProps>({ ergo: "", rsn: "" });
-  const single_asset_handle = async () => {
+  const multiple_asset_handle = async () => {
     const addresses = JSON.parse(localStorage.getItem("addresses"));
 
-    connectWallet()
-    await swap(
-      BigInt(Number(amount.rsn) * 1e4),
-      BigInt(Number(amount.ergo) * 1e9),
+    connectWallet();
+    await send_tx(
       OUTPUT_ADDRESS,
-      addresses
+      BigInt(Number(amount.ergo) * 1e9),
+      BigInt(Number(amount.rsn) * 1e4),
+      addresses,
     );
   };
   return (
@@ -186,7 +187,7 @@ const SingleAsset = () => {
               <StakeViaWallet
                 amount={amount}
                 onBack={() => setStep({ ...step, wallet: 1 })}
-                onClickHandler={single_asset_handle}
+                onClickHandler={multiple_asset_handle}
               />
             ) : (
               <FirstStep
@@ -224,4 +225,4 @@ const SingleAsset = () => {
   );
 };
 
-export default SingleAsset;
+export default MultipleAsset;

@@ -3,6 +3,7 @@ import React from 'react';
 import SegmentedButton from '@/components/segmentedButton/SegmentedButton';
 
 import SingleAsset from './singleAsset/SingleAsset';
+import MultipleAsset from "@/scenes/dashboard/assetManagement/actions/stake/multipleAsset/MultipleAsset";
 
 const Stake = () => {
   return (
@@ -20,6 +21,7 @@ const Stake = () => {
           },
           {
             label: 'Multiple assets (Recommended)',
+            children: <MultipleAsset />,
           },
         ]}
       />

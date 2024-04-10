@@ -66,7 +66,7 @@ class myprover implements Prover {
 
 
 
-export async function swap (rosen_amount: number, erg_amount: number, output_address: string, return_address: string): Promise<ErgoTx> {
+export async function swap(rosen_amount: bigint, erg_amount: bigint, output_address: string, return_address: string): Promise<ErgoTx> {
     await RustModule.load(false)
     const api = new Explorer(API)
     const networkContext = await api.getNetworkContext()

@@ -47,6 +47,7 @@ export const Nautilus = ({ handleCloseModal }: Props) => {
   useEffect(() => {
     if (nautilusResponse?.data?.token) {
       localStorage.setItem('token', nautilusResponse?.data?.token);
+      localStorage.setItem('addresses', JSON.stringify(parameters.address));
       setParameters({
         address: undefined,
         proof: undefined,
