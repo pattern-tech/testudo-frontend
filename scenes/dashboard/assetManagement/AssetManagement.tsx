@@ -15,11 +15,14 @@ import Stake from '@/scenes/dashboard/assetManagement/actions/stake/Stake';
 import BalanceHistory from '@/scenes/dashboard/assetManagement/balanceHistory/BalanceHistory';
 import RewardHistory from '@/scenes/dashboard/assetManagement/rewardHistory/RewardHistory';
 import Withdraw from './actions/withdraw/Withdraw';
+import Unstake from './actions/unstake/Unstake';
+
+
 
 export const AssetManagement = () => {
   const [isOpenActionModals, setIsOpenActionModals] = useState({
     stake: false,
-    unStake: false,
+    Unstake: false,
     withdraw: false,
   });
 
@@ -64,7 +67,16 @@ export const AssetManagement = () => {
           />
           Label
         </Button>
-        <Button className="w-2/6" kind="Outlined">
+        <Button
+          className="w-2/6"
+          kind="Outlined"
+          onClick={() => {
+            setIsOpenActionModals((prevState) => ({
+              ...prevState,
+              Unstake: true,
+            }));
+          }}
+        >
           <Image
             className="mr-2"
             src={dot}
@@ -124,6 +136,17 @@ export const AssetManagement = () => {
           }
         >
           <Withdraw />
+        </PopUp>
+      )}
+      {isOpenActionModals.Unstake && (
+        <PopUp
+          title="Unstake money"
+          state={isOpenActionModals.Unstake}
+          handleClose={() =>
+            setIsOpenActionModals({ ...isOpenActionModals, Unstake: false })
+          }
+        >
+          <Unstake />
         </PopUp>
       )}
     </div>
