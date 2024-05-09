@@ -7,3 +7,5 @@ export { Statistics } from './statistics/Statistics';
 export { JoinUs } from './JoinUs';
 
 export { Footer } from './Footer';
+
+export { DataBox } from './DataBox';

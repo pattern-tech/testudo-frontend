@@ -1,8 +1,8 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import Image from 'next/image';
-
 import dot from '@/assets/svg/dot.svg';
 import info from '@/assets/svg/info.svg';
 import minus from '@/assets/svg/minus.svg';
@@ -17,14 +17,25 @@ import RewardHistory from '@/scenes/dashboard/assetManagement/rewardHistory/Rewa
 import Withdraw from './actions/withdraw/Withdraw';
 import Unstake from './actions/unstake/Unstake';
 
-
-
 export const AssetManagement = () => {
+  const [isMounted, setIsMounted] = useState(false);
+  const router = isMounted ? useRouter() : null;
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const [isOpenActionModals, setIsOpenActionModals] = useState({
     stake: false,
     Unstake: false,
     withdraw: false,
   });
+
+  useEffect(() => {
+    if (router && !localStorage.getItem('token')) {
+      router.push('/');
+    }
+  }, [router]);
 
   return (
     <div className="m-auto w-2/4 pb-24 pt-5">
