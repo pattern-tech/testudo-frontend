@@ -1,7 +1,5 @@
 import React from 'react';
-
 import Image from 'next/image';
-
 import check from '@/assets/svg/check.svg';
 import ergCoin from '@/assets/svg/ergCoin.svg';
 import rsnCoin from '@/assets/svg/rsnCoin.svg';

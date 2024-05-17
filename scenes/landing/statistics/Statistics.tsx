@@ -1,7 +1,5 @@
 import React from 'react';
-
 import Button from '@/components/Button';
-
 import { StatisticBox } from './StatisticBox';
 
 export const Statistics = () => {

@@ -1,8 +1,7 @@
 'use client';
-
 import { Drawer, DrawerProps, styled, SxProps, Theme } from '@mui/material';
-
 import { MenuItemProps, MenuItem } from './MenuItem';
+import { Key } from 'react';
 
 interface Props {
   drawerWidth: number;
@@ -10,6 +9,7 @@ interface Props {
     primary: MenuItemProps[];
     secondary: MenuItemProps[];
   };
+  onMenuItemClick: (title: string) => void;
 }
 
 interface StyledDrawerProps extends DrawerProps {
@@ -17,42 +17,42 @@ interface StyledDrawerProps extends DrawerProps {
   sx?: SxProps<Theme>;
 }
 
-const StyledDrawer = styled(Drawer)<StyledDrawerProps>`
-  width: ${({ width }) => width + '%'};
-  & .MuiDrawer-paper {
-    box-sizing: border-box;
-    background-color: ${({ theme }) => theme.palette.surfaceContainerLow.main};
-    width: ${({ width }) => width + '%'};
-    border: none;
-    border-radius: 1rem;
-    top: 9%;
-    height: 91%;
-    padding: 0.375rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-`;
+const StyledDrawer = styled(Drawer)<StyledDrawerProps>(({ theme, width = 22.7 }) => ({
+  width: `${width}%`,
+  '& .MuiDrawer-paper': {
+    width: `${width}%`,
+    boxSizing: 'border-box',
+    backgroundColor: theme.palette.surfaceContainerLow.main,
+    border: 'none',
+    borderRadius: '1rem',
+    top: '9%',
+    height: '91%',
+    padding: '0.375rem',
+    display: 'flex',
+    flexDirection: 'column',
+    justify: 'space-between',
+  },
+}));
 
-export const NavigationDrawer = ({ drawerWidth, menuItems }: Props) => {
+export const NavigationDrawer = ({
+  drawerWidth,
+  menuItems,
+  onMenuItemClick,
+}: Props) => {
   return (
     <StyledDrawer width={drawerWidth} variant="permanent" open>
-      <Drawer variant="permanent" anchor="left">
-        {menuItems?.primary && (
-          <div>
-            {menuItems?.primary?.map((item, index) => (
-              <MenuItem key={index} menuItem={item} />
-            ))}
-          </div>
-        )}
-        {menuItems?.secondary && (
-          <div className="flex flex-col items-center">
-            {menuItems.secondary?.map((item, index) => (
-              <MenuItem key={index} menuItem={item} />
-            ))}
-          </div>
-        )}
-      </Drawer>
+      <div className="flex flex-col justify-between h-full">
+        <div>
+          {menuItems.primary.map((item: MenuItemProps, index: Key) => (
+            <MenuItem key={index} menuItem={item} onClick={onMenuItemClick} />
+          ))}
+        </div>
+        <div className="mt-auto">
+          {menuItems.secondary.map((item: MenuItemProps, index: Key) => (
+            <MenuItem key={index} menuItem={item} onClick={onMenuItemClick} />
+          ))}
+        </div>
+      </div>
     </StyledDrawer>
   );
 };
