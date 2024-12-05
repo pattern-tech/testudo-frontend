@@ -14,10 +14,11 @@ import Tooltip from '@/components/Tooltip';
 import Stake from '@/scenes/dashboard/assetManagement/actions/stake/Stake';
 import BalanceHistory from '@/scenes/dashboard/assetManagement/balanceHistory/BalanceHistory';
 import RewardHistory from '@/scenes/dashboard/assetManagement/rewardHistory/RewardHistory';
+import Withdraw from './actions/withdraw/Withdraw';
 
 export const AssetManagement = () => {
   const [isOpenActionModals, setIsOpenActionModals] = useState({
-    stake: true,
+    stake: false,
     unStake: false,
     withdraw: false,
   });
@@ -73,13 +74,19 @@ export const AssetManagement = () => {
           />
           Unstake
         </Button>
-        <Button className="w-2/6" kind="Outlined">
+        <Button
+          className="w-2/6"
+          kind="Outlined"
+          onClick={() =>
+            setIsOpenActionModals({ ...isOpenActionModals, withdraw: true })
+          }
+        >
           <Image
             className="mr-2"
             src={minus}
             width={18}
             height={18}
-            alt="dot icon"
+            alt="minus icon"
           />
           Withdraw
         </Button>
@@ -106,6 +113,17 @@ export const AssetManagement = () => {
           }
         >
           <Stake />
+        </PopUp>
+      )}
+      {isOpenActionModals.withdraw && (
+        <PopUp
+          title="Withdraw money"
+          state={isOpenActionModals.withdraw}
+          handleClose={() =>
+            setIsOpenActionModals({ ...isOpenActionModals, withdraw: false })
+          }
+        >
+          <Withdraw />
         </PopUp>
       )}
     </div>
